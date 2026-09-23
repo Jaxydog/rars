@@ -13,6 +13,7 @@ import rars.Globals;
 import rars.Settings;
 import rars.venus.editors.jeditsyntax.tokenmarker.Token;
 import rars.venus.editors.jeditsyntax.tokenmarker.TokenMarker;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -66,7 +67,7 @@ public class JEditTextArea extends JComponent {
      * bar is added this way.
      */
     public static String LEFT_OF_SCROLLBAR = "los";
-    public static Color POPUP_HELP_TEXT_COLOR = Color.BLACK;  // DPS 11-July-2014
+    public static Color POPUP_HELP_TEXT_COLOR = ColorTheme.DEFAULT.getBackgroundDark();  // DPS 11-July-2014
 
     // Number of text lines moved for each click of the vertical scrollbar buttons.
     private static final int VERTICAL_SCROLLBAR_UNIT_INCREMENT_IN_LINES = 1;
@@ -2295,5 +2296,3 @@ public class JEditTextArea extends JComponent {
         caretTimer.start();
     }
 }
-
-

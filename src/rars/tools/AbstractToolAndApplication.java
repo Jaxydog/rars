@@ -9,6 +9,7 @@ import rars.simulator.Simulator;
 import rars.simulator.SimulatorNotice;
 import rars.util.FilenameFinder;
 import rars.venus.run.RunSpeedPanel;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -76,7 +77,7 @@ public abstract class AbstractToolAndApplication extends JFrame implements Tool,
 
     // Some GUI settings
     private EmptyBorder emptyBorder = new EmptyBorder(4, 4, 4, 4);
-    private Color backgroundColor = Color.WHITE;
+    private Color backgroundColor = ColorTheme.DEFAULT.getBackground();
 
 
     private int lowMemoryAddress = Memory.dataSegmentBaseAddress;

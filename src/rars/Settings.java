@@ -4,6 +4,7 @@ import rars.util.Binary;
 import rars.util.EditorFont;
 import rars.venus.editors.jeditsyntax.SyntaxStyle;
 import rars.venus.editors.jeditsyntax.SyntaxUtilities;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -381,7 +382,25 @@ public class Settings extends Observable {
      * Must match key by list position.
      */
     private static String[] defaultColorSettingsValues = {
-            "0x00e0e0e0", "0", "0x00ffffff", "0", "0x00ffff99", "0", "0x0033ff00", "0", "0x0099ccff", "0", "0x0099cc55", "0", "0x00ffffff", "0x00000000", "0x00eeeeee", "0x00ccccff", "0x00000000"};
+        "%#08x".formatted(ColorTheme.DEFAULT.backgroundDark()),
+        "%#08x".formatted(ColorTheme.DEFAULT.text()),
+        "%#08x".formatted(ColorTheme.DEFAULT.background()),
+        "%#08x".formatted(ColorTheme.DEFAULT.text()),
+        "%#08x".formatted(ColorTheme.DEFAULT.overlayDark()),
+        "%#08x".formatted(ColorTheme.DEFAULT.text()),
+        "%#08x".formatted(ColorTheme.DEFAULT.green()),
+        "%#08x".formatted(ColorTheme.DEFAULT.backgroundDark()),
+        "%#08x".formatted(ColorTheme.DEFAULT.blue()),
+        "%#08x".formatted(ColorTheme.DEFAULT.backgroundDark()),
+        "%#08x".formatted(ColorTheme.DEFAULT.teal()),
+        "%#08x".formatted(ColorTheme.DEFAULT.backgroundDark()),
+        "%#08x".formatted(ColorTheme.DEFAULT.background()),
+        "%#08x".formatted(ColorTheme.DEFAULT.text()),
+        "%#08x".formatted(ColorTheme.DEFAULT.overlayDark()),
+        "%#08x".formatted(ColorTheme.DEFAULT.overlay()),
+        "%#08x".formatted(ColorTheme.DEFAULT.text()),
+    };
+
 
     interface SystemColorProvider { Color getColor();}
     private SystemColorProvider[] systemColors;

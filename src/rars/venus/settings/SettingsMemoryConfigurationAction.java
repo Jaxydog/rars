@@ -7,6 +7,7 @@ import rars.simulator.Simulator;
 import rars.util.Binary;
 import rars.venus.FileStatus;
 import rars.venus.GuiAction;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -120,7 +121,7 @@ public class SettingsMemoryConfigurationAction extends GuiAction {
                 choices.add(button);
                 chooserPanel.add(button);
             }
-            chooserPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK)
+            chooserPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(ColorTheme.DEFAULT.getBackgroundDark())
                     , "Configuration"));
             return chooserPanel;
         }

@@ -11,6 +11,7 @@ package rars.venus.editors.jeditsyntax;
 
 import rars.Globals;
 import rars.venus.editors.jeditsyntax.tokenmarker.Token;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.text.Segment;
@@ -94,17 +95,17 @@ public class SyntaxUtilities {
         // SyntaxStyle constructor params: color, italic?, bold?
         // All need to be assigned even if not used by language (no gaps in array)
         styles[Token.NULL] = new SyntaxStyle(Color.black, false, false);
-        styles[Token.COMMENT1] = new SyntaxStyle(new Color(0x00CC33), true, false);//(Color.black,true,false);
-        styles[Token.COMMENT2] = new SyntaxStyle(new Color(0x990033), true, false);
-        styles[Token.KEYWORD1] = new SyntaxStyle(Color.blue, false, false);//(Color.black,false,true);
-        styles[Token.KEYWORD2] = new SyntaxStyle(Color.magenta, false, false);
-        styles[Token.KEYWORD3] = new SyntaxStyle(Color.red, false, false);//(new Color(0x009600),false,false);
-        styles[Token.LITERAL1] = new SyntaxStyle(new Color(0x00CC33), false, false);//(new Color(0x650099),false,false);
-        styles[Token.LITERAL2] = new SyntaxStyle(new Color(0x00CC33), false, false);//(new Color(0x650099),false,true);
-        styles[Token.LABEL] = new SyntaxStyle(Color.black, true, false);//(new Color(0x990033),false,true);
-        styles[Token.OPERATOR] = new SyntaxStyle(Color.black, false, true);
-        styles[Token.INVALID] = new SyntaxStyle(Color.red, false, false);
-        styles[Token.MACRO_ARG] = new SyntaxStyle(new Color(150, 150, 0), false, false);
+        styles[Token.COMMENT1] = new SyntaxStyle(ColorTheme.DEFAULT.getSubtextDark(), true, false);//(Color.black,true,false);
+        styles[Token.COMMENT2] = new SyntaxStyle(ColorTheme.DEFAULT.getSubtextDark(), true, false);
+        styles[Token.KEYWORD1] = new SyntaxStyle(ColorTheme.DEFAULT.getLavender(), false, false);//(Color.black,false,true);
+        styles[Token.KEYWORD2] = new SyntaxStyle(ColorTheme.DEFAULT.getMauve(), false, false);
+        styles[Token.KEYWORD3] = new SyntaxStyle(ColorTheme.DEFAULT.getPink(), false, false);//(new Color(0x009600),false,false);
+        styles[Token.LITERAL1] = new SyntaxStyle(ColorTheme.DEFAULT.getGreen(), false, false);//(new Color(0x650099),false,false);
+        styles[Token.LITERAL2] = new SyntaxStyle(ColorTheme.DEFAULT.getTeal(), false, false);//(new Color(0x650099),false,true);
+        styles[Token.LABEL] = new SyntaxStyle(ColorTheme.DEFAULT.getBlue(), true, false);//(new Color(0x990033),false,true);
+        styles[Token.OPERATOR] = new SyntaxStyle(ColorTheme.DEFAULT.getPeach(), false, true);
+        styles[Token.INVALID] = new SyntaxStyle(ColorTheme.DEFAULT.getRed(), false, false);
+        styles[Token.MACRO_ARG] = new SyntaxStyle(ColorTheme.DEFAULT.getFlamingo(), false, false);
         return styles;
     }
 

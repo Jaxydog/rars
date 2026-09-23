@@ -6,6 +6,7 @@ import rars.venus.ExecutePane;
 import rars.venus.GuiAction;
 import rars.venus.MonoRightCellRenderer;
 import rars.venus.util.AbstractFontSettingDialog;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -252,7 +253,7 @@ public class SettingsHighlightingAction extends GuiAction {
         dataHighlightPanel.add(dataHighlightButton);
         registerHighlightPanel.add(new JLabel("* Register highlighting is"));
         registerHighlightPanel.add(registerHighlightButton);
-        dataRegisterHighlightControl.setBorder(new LineBorder(Color.BLACK));
+        dataRegisterHighlightControl.setBorder(new LineBorder(ColorTheme.DEFAULT.getBackgroundDark()));
         dataRegisterHighlightControl.add(dataHighlightPanel);
         dataRegisterHighlightControl.add(registerHighlightPanel);
 
@@ -316,7 +317,7 @@ public class SettingsHighlightingAction extends GuiAction {
     // Called once, upon dialog setup.
     private void initializeButtonColors() {
         Settings settings = Globals.getSettings();
-        LineBorder lineBorder = new LineBorder(Color.BLACK);
+        LineBorder lineBorder = new LineBorder(ColorTheme.DEFAULT.getBackgroundDark());
         Color backgroundSetting, foregroundSetting;
         Font fontSetting;
         for (int i = 0; i < backgroundSettingPositions.length; i++) {
@@ -605,8 +606,8 @@ public class SettingsHighlightingAction extends GuiAction {
 //  whether enabled or not.  The default behavior does not work
 //  well on buttons with black background.
 class ColorSelectButton extends JButton {
-    private static final Border ColorSelectButtonEnabledBorder = new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.GRAY);
-    private static final Border ColorSelectButtonDisabledBorder = new LineBorder(Color.GRAY, 2);
+    private static final Border ColorSelectButtonEnabledBorder = new BevelBorder(BevelBorder.RAISED, ColorTheme.DEFAULT.getSurface(), ColorTheme.DEFAULT.getSurfaceDark());
+    private static final Border ColorSelectButtonDisabledBorder = new LineBorder(ColorTheme.DEFAULT.getSurfaceDark(), 2);
 
     public void setEnabled(boolean status) {
         super.setEnabled(status);

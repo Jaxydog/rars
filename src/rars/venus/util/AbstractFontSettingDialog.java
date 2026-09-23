@@ -148,7 +148,7 @@ public abstract class AbstractFontSettingDialog extends JDialog {
         familyStyleComponents.add(fontStyleSelector);
 
         fontSample = new JLabel("Sample of this font", SwingConstants.CENTER);
-        fontSample.setBorder(new LineBorder(Color.BLACK));
+        fontSample.setBorder(new LineBorder(ColorTheme.DEFAULT.getBackgroundDark()));
         fontSample.setFont(getFont());
         fontSample.setToolTipText("Dynamically updated font sample based on current settings");
         JPanel sizeComponents = new JPanel();

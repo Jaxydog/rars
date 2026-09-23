@@ -3,6 +3,7 @@ package rars.venus;
 import rars.Globals;
 import rars.assembler.Directives;
 import rars.riscv.*;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
@@ -68,7 +69,7 @@ public class HelpHelpAction extends GuiAction {
     }
 
     // Light gray background color for alternating lines of the instruction lists
-    static Color altBackgroundColor = new Color(0xEE, 0xEE, 0xEE);
+    static Color altBackgroundColor = ColorTheme.DEFAULT.getBackgroundLight();
 
     /**
      * Separates Instruction name descriptor from detailed (operation) description
@@ -137,6 +138,7 @@ public class HelpHelpAction extends GuiAction {
             helpDisplay = new JEditorPane("text/html", text.toString());
             helpDisplay.setEditable(false);
             helpDisplay.setCaretPosition(0); // assure top of document displayed
+            helpDisplay.setBackground(ColorTheme.DEFAULT.getOverlayLight());
             helpScrollPane = new JScrollPane(helpDisplay, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                     JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
             helpDisplay.addHyperlinkListener(new HelpHyperlinkListener());
@@ -159,6 +161,7 @@ public class HelpHelpAction extends GuiAction {
             copyrightDisplay = new JEditorPane("text/html", "<pre>" + text.toString());
             copyrightDisplay.setEditable(false);
             copyrightDisplay.setCaretPosition(0); // assure top of document displayed
+            copyrightDisplay.setBackground(ColorTheme.DEFAULT.getOverlayLight());
             copyrightScrollPane = new JScrollPane(copyrightDisplay, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                     JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         } catch (Exception ioe) {
@@ -188,7 +191,7 @@ public class HelpHelpAction extends GuiAction {
     // Set up MIPS help tab.  Most contents are generated from instruction set info.
     private JPanel createHelpInfoPanel() {
         JPanel helpInfo = new JPanel(new BorderLayout());
-        String helpRemarksColor = "CCFF99";
+        String helpRemarksColor = "%06x".formatted(ColorTheme.DEFAULT.backgroundDark());
         // Introductory remarks go at the top as a label
         // TODO: update this to consider 12 and 20 bit numbers rather than 16
         String helpRemarks =
@@ -312,6 +315,7 @@ public class HelpHelpAction extends GuiAction {
 
         html.setCaretPosition(0); // this affects scroll position
         html.setEditable(false);
+        html.setBackground(ColorTheme.DEFAULT.getOverlayLight());
         return new JScrollPane(html, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
@@ -453,7 +457,7 @@ public class HelpHelpAction extends GuiAction {
                             JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
                     webpageURL = new JTextField(e.getURL().toString(), 50);
                     webpageURL.setEditable(false);
-                    webpageURL.setBackground(Color.WHITE);
+                    webpageURL.setBackground(ColorTheme.DEFAULT.getOverlayLight());
                     JPanel URLPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 4, 4));
                     URLPanel.add(new JLabel("URL: "));
                     URLPanel.add(webpageURL);

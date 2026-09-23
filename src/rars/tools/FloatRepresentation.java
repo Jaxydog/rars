@@ -5,6 +5,7 @@ import rars.riscv.hardware.AccessNotice;
 import rars.riscv.hardware.FloatingPointRegisterFile;
 import rars.riscv.hardware.Register;
 import rars.util.Binary;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -72,11 +73,11 @@ public class FloatRepresentation extends AbstractToolAndApplication {
     private static final Font hexDisplayFont = new Font("Courier", Font.PLAIN, 32);
     private static final Font binaryDisplayFont = new Font("Courier", Font.PLAIN, 18);
     private static final Font decimalDisplayFont = new Font("Courier", Font.PLAIN, 18);
-    private static final Color hexDisplayColor = Color.red;
-    private static final Color binaryDisplayColor = Color.black;
-    private static final Color decimalDisplayColor = Color.blue;
-    private static final String expansionFontTag = "<font size=\"+1\" face=\"Courier\" color=\"#000000\">";
-    private static final String instructionFontTag = "<font size=\"+0\" face=\"Verdana, Arial, Helvetica\" color=\"#000000\">";
+    private static final Color hexDisplayColor = ColorTheme.DEFAULT.getRed();
+    private static final Color binaryDisplayColor = ColorTheme.DEFAULT.getText();
+    private static final Color decimalDisplayColor = ColorTheme.DEFAULT.getBlue();
+    private static final String expansionFontTag = "<font size=\"+1\" face=\"Courier\" color=\"#%06x\">".formatted(ColorTheme.DEFAULT.text());
+    private static final String instructionFontTag = "<font size=\"+0\" face=\"Verdana, Arial, Helvetica\" color=\"#%06x\">".formatted(ColorTheme.DEFAULT.text());
     private static final int exponentBias = 127;  // 32 bit floating point exponent bias
 
     private Register attachedRegister = null;
@@ -307,7 +308,7 @@ public class FloatRepresentation extends AbstractToolAndApplication {
         JEditorPane hexExplain = new JEditorPane("text/html", expansionFontTag + "&lt;&nbsp;&nbsp;Hexadecimal representation" + "</font>");
         hexExplain.setEditable(false);
         hexExplain.setFocusable(false);
-        hexExplain.setForeground(Color.black);
+        hexExplain.setForeground(place1.getForeground());
         hexExplain.setBackground(place1.getBackground());
         JEditorPane hexToBinExplain = new JEditorPane("text/html", expansionFontTag + "&lt;&nbsp;&nbsp;Each hex digit represents 4 bits" + "</font>");
         hexToBinExplain.setEditable(false);
@@ -777,7 +778,7 @@ public class FloatRepresentation extends AbstractToolAndApplication {
         // underlying JPanel (see first statement).
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            g.setColor(Color.red);
+            g.setColor(ColorTheme.DEFAULT.getRed());
             //FontMetrics fontMetrics = hexDisplay.getGraphics().getFontMetrics();
             int upperY = 0;
             int lowerY = 60;
@@ -833,6 +834,7 @@ public class FloatRepresentation extends AbstractToolAndApplication {
 
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
+            g.setColor(ColorTheme.DEFAULT.getSubtext());
             // Arrow down from binary sign field
             centerX = binarySignDecoratedDisplay.getX() + binarySignDecoratedDisplay.getWidth() / 2;
             g.drawLine(centerX, lowerY, centerX, upperY);
@@ -901,6 +903,7 @@ public class FloatRepresentation extends AbstractToolAndApplication {
         InstructionsPane(Component parent) {
             super(defaultInstructions);
             this.setFont(instructionsFont);
+            this.setForeground(parent.getForeground());
             this.setBackground(parent.getBackground());
         }
 

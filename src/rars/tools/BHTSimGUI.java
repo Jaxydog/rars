@@ -27,6 +27,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 package rars.tools;//.bhtsim;
 
+import rars.venus.util.ColorTheme;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
@@ -92,17 +94,17 @@ public class BHTSimGUI extends JPanel {
     /**
      * constant for the color that highlights the current BHT entry
      */
-    public final static Color COLOR_PREPREDICTION = Color.yellow;
+    public final static Color COLOR_PREPREDICTION = ColorTheme.DEFAULT.getYellow();
 
     /**
      * constant for the color to signal a correct prediction
      */
-    public final static Color COLOR_PREDICTION_CORRECT = Color.green;
+    public final static Color COLOR_PREDICTION_CORRECT = ColorTheme.DEFAULT.getGreen();
 
     /**
      * constant for the color to signal a misprediction
      */
-    public final static Color COLOR_PREDICTION_INCORRECT = Color.red;
+    public final static Color COLOR_PREDICTION_INCORRECT = ColorTheme.DEFAULT.getRed();
 
     /**
      * constant for the String representing "take the branch"

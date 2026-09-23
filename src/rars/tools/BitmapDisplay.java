@@ -3,6 +3,7 @@ package rars.tools;
 import rars.riscv.hardware.AccessNotice;
 import rars.riscv.hardware.Memory;
 import rars.riscv.hardware.MemoryAccessNotice;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -60,7 +61,7 @@ public class BitmapDisplay extends AbstractToolAndApplication {
     // Some GUI settings
     private EmptyBorder emptyBorder = new EmptyBorder(4, 4, 4, 4);
     private Font countFonts = new Font("Times", Font.BOLD, 12);
-    private Color backgroundColor = Color.WHITE;
+    private Color backgroundColor = ColorTheme.DEFAULT.getBackgroundDark();
 
     // Values for Combo Boxes
 

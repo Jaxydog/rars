@@ -11,6 +11,7 @@ import rars.util.Binary;
 import rars.venus.MonoRightCellRenderer;
 import rars.venus.NumberDisplayBaseChooser;
 import rars.venus.run.RunSpeedPanel;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -361,7 +362,7 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
             regToolTips = row;
             columnToolTips = col;
             this.setRowSelectionAllowed(true); // highlights background color of entire row
-            this.setSelectionBackground(Color.GREEN);
+            this.setSelectionBackground(ColorTheme.DEFAULT.getGreen());
         }
 
         private String[] regToolTips;

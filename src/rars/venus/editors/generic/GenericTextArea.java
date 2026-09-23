@@ -3,6 +3,7 @@ package rars.venus.editors.generic;
 import rars.Globals;
 import rars.venus.EditPane;
 import rars.venus.editors.TextEditingArea;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -137,7 +138,7 @@ public class GenericTextArea extends JTextArea implements TextEditingArea {
 
     public void setSourceCode(String s, boolean editable) {
         this.setText(s);
-        this.setBackground((editable) ? Color.WHITE : Color.GRAY);
+        this.setBackground((editable) ? ColorTheme.DEFAULT.getBackground() : ColorTheme.DEFAULT.getBackgroundDark());
         this.setEditable(editable);
         this.setEnabled(editable);
         this.getCaret().setVisible(editable);

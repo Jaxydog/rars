@@ -4,6 +4,7 @@ import rars.riscv.hardware.AccessNotice;
 import rars.riscv.hardware.Memory;
 import rars.riscv.hardware.MemoryAccessNotice;
 import rars.util.Binary;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -74,7 +75,7 @@ public class CacheSimulator extends AbstractToolAndApplication {
     // Some GUI settings
     private EmptyBorder emptyBorder = new EmptyBorder(4, 4, 4, 4);
     private Font countFonts = new Font("Times", Font.BOLD, 12);
-    private Color backgroundColor = Color.WHITE;
+    private Color backgroundColor = ColorTheme.DEFAULT.getBackground();
 
     // Values for Combo Boxes
     private int[] cacheBlockSizeChoicesInt, cacheBlockCountChoicesInt;
@@ -163,13 +164,14 @@ public class CacheSimulator extends AbstractToolAndApplication {
                         debug = e.getStateChange() == ItemEvent.SELECTED;
                         resetLogDisplay();
                         logText.setEnabled(debug);
-                        logText.setBackground(debug ? Color.WHITE : logPanel.getBackground());
+                        logText.setBackground(debug ? ColorTheme.DEFAULT.getBackgroundDark() : logPanel.getBackground());
                     }
                 });
         logPanel.add(logShow);
         logText = new JTextArea(5, 70);
         logText.setEnabled(debug);
-        logText.setBackground(debug ? Color.WHITE : logPanel.getBackground());
+        logText.setForeground(ColorTheme.DEFAULT.getText());
+        logText.setBackground(debug ? ColorTheme.DEFAULT.getBackgroundDark() : logPanel.getBackground());
         logText.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
         logText.setToolTipText("Displays cache activity log if enabled");
         logScroll = new JScrollPane(logText, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -344,7 +346,7 @@ public class CacheSimulator extends AbstractToolAndApplication {
         cacheHitRateRow.add(new JLabel("Cache Hit Rate "), BorderLayout.WEST);
         cacheHitRateDisplay = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
         cacheHitRateDisplay.setStringPainted(true);
-        cacheHitRateDisplay.setForeground(Color.BLUE);
+        cacheHitRateDisplay.setForeground(ColorTheme.DEFAULT.getBlue());
         cacheHitRateDisplay.setBackground(backgroundColor);
         cacheHitRateDisplay.setFont(countFonts);
         cacheHitRateRow.add(cacheHitRateDisplay, BorderLayout.EAST);
@@ -377,7 +379,7 @@ public class CacheSimulator extends AbstractToolAndApplication {
         JPanel emptyBox = new JPanel();
         emptyBox.setSize(colorKeyBoxSize);
         emptyBox.setBackground(animations.defaultColor);
-        emptyBox.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        emptyBox.setBorder(BorderFactory.createLineBorder(ColorTheme.DEFAULT.getBackgroundDark()));
         emptyKey.add(emptyBox);
         emptyKey.add(new JLabel(" = empty"));
 
@@ -385,7 +387,7 @@ public class CacheSimulator extends AbstractToolAndApplication {
         JPanel missKey = new JPanel(new FlowLayout(FlowLayout.LEFT));
         missBox.setSize(colorKeyBoxSize);
         missBox.setBackground(animations.missColor);
-        missBox.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        missBox.setBorder(BorderFactory.createLineBorder(ColorTheme.DEFAULT.getBackgroundDark()));
         missKey.add(missBox);
         missKey.add(new JLabel(" = miss"));
 
@@ -393,7 +395,7 @@ public class CacheSimulator extends AbstractToolAndApplication {
         JPanel hitBox = new JPanel();
         hitBox.setSize(colorKeyBoxSize);
         hitBox.setBackground(animations.hitColor);
-        hitBox.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        hitBox.setBorder(BorderFactory.createLineBorder(ColorTheme.DEFAULT.getBackgroundDark()));
         hitKey.add(hitBox);
         hitKey.add(new JLabel(" = hit"));
 
@@ -852,9 +854,9 @@ public class CacheSimulator extends AbstractToolAndApplication {
 
         private Box animation;
         private JTextField[] blocks;
-        public final Color hitColor = Color.GREEN;
-        public final Color missColor = Color.RED;
-        public final Color defaultColor = Color.WHITE;
+        public final Color hitColor = ColorTheme.DEFAULT.getGreen();
+        public final Color missColor = ColorTheme.DEFAULT.getRed();
+        public final Color defaultColor = ColorTheme.DEFAULT.getBackgroundDark();
 
         public Animation() {
             animation = Box.createVerticalBox();

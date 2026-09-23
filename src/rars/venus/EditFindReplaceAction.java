@@ -2,6 +2,7 @@ package rars.venus;
 
 import rars.Globals;
 import rars.venus.editors.TextEditingArea;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -147,7 +148,7 @@ public class EditFindReplaceAction extends GuiAction {
             JPanel resultsPanel = new JPanel(new GridLayout(1, 1));
             resultsPanel.setBorder(BorderFactory.createTitledBorder("Outcome"));
             resultsLabel = new JLabel("");
-            resultsLabel.setForeground(Color.RED);
+            resultsLabel.setForeground(ColorTheme.DEFAULT.getRed());
             resultsLabel.setToolTipText(RESULTS_TOOL_TIP_TEXT);
             resultsPanel.add(resultsLabel);
             optionsPanel.add(resultsPanel);

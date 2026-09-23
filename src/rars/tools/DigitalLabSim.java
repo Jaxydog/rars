@@ -3,6 +3,7 @@ package rars.tools;
 import rars.Globals;
 import rars.riscv.hardware.*;
 import rars.util.Binary;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -246,9 +247,9 @@ public class DigitalLabSim extends AbstractToolAndApplication {
             char c = 'a';
             while (c <= 'h') {
                 if ((aff & 0x1) == 1)
-                    g.setColor(Color.RED);
+                    g.setColor(ColorTheme.DEFAULT.getRed());
                 else
-                    g.setColor(Color.LIGHT_GRAY);
+                    g.setColor(ColorTheme.DEFAULT.getSubtextDark());
                 SwitchSegment(g, c);
                 aff = (char) (aff >>> 1);
                 c++;
@@ -305,7 +306,7 @@ public class DigitalLabSim extends AbstractToolAndApplication {
             button = new JButton[16];
             for (i = 0; i < 16; i++) {
                 button[i] = new JButton(Integer.toHexString(i));
-                button[i].setBackground(Color.WHITE);
+                button[i].setBackground(ColorTheme.DEFAULT.getBackgroundLight());
                 button[i].setMargin(new Insets(10, 10, 10, 10));
                 button[i].addMouseListener(new EcouteurClick(i));
                 this.add(button[i]);
@@ -316,7 +317,7 @@ public class DigitalLabSim extends AbstractToolAndApplication {
             int i;
             KeyBoardValueButtonClick = -1;
             for (i = 0; i < 16; i++) {
-                button[i].setBackground(Color.WHITE);
+                button[i].setBackground(ColorTheme.DEFAULT.getBackgroundLight());
             }
         }
 
@@ -345,10 +346,10 @@ public class DigitalLabSim extends AbstractToolAndApplication {
                     KeyBoardValueButtonClick = -1;
                     updateMMIOControlAndData(OUT_ADRESS_HEXA_KEYBOARD, 0);
                     for (i = 0; i < 16; i++)
-                        button[i].setBackground(Color.WHITE);
+                        button[i].setBackground(ColorTheme.DEFAULT.getBackgroundLight());
                 } else { // new button pressed
                     KeyBoardValueButtonClick = buttonValue;
-                    button[KeyBoardValueButtonClick].setBackground(Color.GREEN);
+                    button[KeyBoardValueButtonClick].setBackground(ColorTheme.DEFAULT.getSurfaceDark());
                     if (KeyboardInterruptOnOff) {
                         InterruptController.registerExternalInterrupt(EXTERNAL_INTERRUPT_HEXA_KEYBOARD);
                     }

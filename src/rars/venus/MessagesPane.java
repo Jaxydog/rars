@@ -3,6 +3,7 @@ package rars.venus;
 import rars.ErrorList;
 import rars.Globals;
 import rars.simulator.Simulator;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -113,8 +114,8 @@ public class MessagesPane extends JTabbedPane {
                             // If error or warning, parse out the line and column number.
                             if (text.startsWith(ErrorList.ERROR_MESSAGE_PREFIX) || text.startsWith(ErrorList.WARNING_MESSAGE_PREFIX)) {
                                 assemble.select(lineStart, lineEnd);
-                                assemble.setSelectionColor(Color.YELLOW);
-                                assemble.setSelectedTextColor(Color.BLACK);
+                                assemble.setSelectionColor(ColorTheme.DEFAULT.getYellow());
+                                assemble.setSelectedTextColor(ColorTheme.DEFAULT.getBackgroundDark());
                                 assemble.repaint();
                                 int separatorPosition = text.indexOf(ErrorList.MESSAGE_SEPARATOR);
                                 if (separatorPosition >= 0) {
@@ -174,7 +175,6 @@ public class MessagesPane extends JTabbedPane {
 
         this.addTab("Messages", assembleTab);
         this.addTab("Run I/O", runTab);
-        this.setForeground(Color.BLACK);
 
         this.setToolTipTextAt(0, "Messages produced by Run menu. Click on assemble error message to select erroneous line");
         this.setToolTipTextAt(1, "Simulated console input and output");
@@ -214,8 +214,8 @@ public class MessagesPane extends JTabbedPane {
                 textLine = assemble.getLineOfOffset(textPosition);
                 lineStart = assemble.getLineStartOffset(textLine);
                 lineEnd = assemble.getLineEndOffset(textLine);
-                assemble.setSelectionColor(Color.YELLOW);
-                assemble.setSelectedTextColor(Color.BLACK);
+                assemble.setSelectionColor(ColorTheme.DEFAULT.getYellow());
+                assemble.setSelectedTextColor(ColorTheme.DEFAULT.getBackgroundDark());
                 assemble.select(lineStart, lineEnd);
                 assemble.getCaret().setSelectionVisible(true);
                 assemble.repaint();

@@ -3,6 +3,7 @@ package rars.tools;
 import rars.riscv.hardware.AccessNotice;
 import rars.riscv.hardware.Memory;
 import rars.riscv.hardware.MemoryAccessNotice;
+import rars.venus.util.ColorTheme;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -64,7 +65,7 @@ public class MemoryReferenceVisualization extends AbstractToolAndApplication {
     // Some GUI settings
     private EmptyBorder emptyBorder = new EmptyBorder(4, 4, 4, 4);
     private Font countFonts = new Font("Times", Font.BOLD, 12);
-    private Color backgroundColor = Color.WHITE;
+    private Color backgroundColor = ColorTheme.DEFAULT.getBackground();
 
     // Values for Combo Boxes
 
@@ -93,12 +94,12 @@ public class MemoryReferenceVisualization extends AbstractToolAndApplication {
     // This array of (count,color) pairs must be kept sorted! count is low end of subrange.
     // This array will grow if user adds colors at additional counter points (see below).
     private CounterColor[] defaultCounterColors =
-            {new CounterColor(0, Color.black),
-                    new CounterColor(1, Color.blue),
-                    new CounterColor(2, Color.green),
-                    new CounterColor(3, Color.yellow),
-                    new CounterColor(5, Color.orange),
-                    new CounterColor(10, Color.red)
+            {new CounterColor(0, ColorTheme.DEFAULT.getSubtext()),
+                    new CounterColor(1, ColorTheme.DEFAULT.getBlue()),
+                    new CounterColor(2, ColorTheme.DEFAULT.getGreen()),
+                    new CounterColor(3, ColorTheme.DEFAULT.getYellow()),
+                    new CounterColor(5, ColorTheme.DEFAULT.getPeach()),
+                    new CounterColor(10, ColorTheme.DEFAULT.getRed())
             };
     /*  Values for reference count color slider. These are all possible counter values for which
      *  colors can be assigned.  As you can see just above, not all these values are assigned
