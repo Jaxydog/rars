@@ -2,9 +2,13 @@ package rars.venus;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
+
+import rars.Globals;
+import rars.Settings;
+
 import java.awt.*;
 
-	/*
+/*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
 
 Developed by Pete Sanderson (psanderson@otterbein.edu)
@@ -30,7 +34,7 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 (MIT license, http://www.opensource.org/licenses/mit-license.html)
- */
+*/
 
 /*
  * Use this to render Monospaced and right-aligned data in JTables.
@@ -39,10 +43,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * of the integer value.
  */
 public class MonoRightCellRenderer extends DefaultTableCellRenderer {
-    public static final Font MONOSPACED_PLAIN_12POINT = new Font("Monospaced", Font.PLAIN, 12);
+    public static Font MONOSPACED_PLAIN_12POINT = Globals.getSettings().getFontByPosition(Settings.EDITOR_FONT);
 
     public Component getTableCellRendererComponent(JTable table, Object value,
-                                                   boolean isSelected, boolean hasFocus, int row, int column) {
+            boolean isSelected, boolean hasFocus, int row, int column) {
         JLabel cell = (JLabel) super.getTableCellRendererComponent(table, value,
                 isSelected, hasFocus, row, column);
         cell.setFont(MONOSPACED_PLAIN_12POINT);

@@ -69,9 +69,9 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
 
     private Settings settings;
 
-
     /**
-     * Constructor which sets up a fresh window with a table that contains the register values.
+     * Constructor which sets up a fresh window with a table that contains the
+     * register values.
      **/
     public RegisterBlockWindow(Register[] registers, String[] registerDescriptions, String valueTip) {
         Simulator.getInstance().addObserver(this);
@@ -80,7 +80,8 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
         this.registers = registers;
         clearHighlighting();
         table = new MyTippedJTable(new RegTableModel(setupWindow()), registerDescriptions,
-                new String[]{"Each register has a tool tip describing its usage convention", "Corresponding register number", valueTip}) {
+                new String[] { "Each register has a tool tip describing its usage convention",
+                        "Corresponding register number", valueTip }) {
         };
         updateRowHeight();
         table.getColumnModel().getColumn(NAME_COLUMN).setPreferredWidth(50);
@@ -88,12 +89,16 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
         table.getColumnModel().getColumn(VALUE_COLUMN).setPreferredWidth(60);
 
         // Display register values (String-ified) right-justified in mono font
-        table.getColumnModel().getColumn(NAME_COLUMN).setCellRenderer(new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.LEFT));
-        table.getColumnModel().getColumn(NUMBER_COLUMN).setCellRenderer(new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.RIGHT));
-        table.getColumnModel().getColumn(VALUE_COLUMN).setCellRenderer(new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.RIGHT));
+        table.getColumnModel().getColumn(NAME_COLUMN).setCellRenderer(
+                new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.LEFT));
+        table.getColumnModel().getColumn(NUMBER_COLUMN).setCellRenderer(
+                new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.RIGHT));
+        table.getColumnModel().getColumn(VALUE_COLUMN).setCellRenderer(
+                new RegisterCellRenderer(MonoRightCellRenderer.MONOSPACED_PLAIN_12POINT, SwingConstants.RIGHT));
         table.setPreferredScrollableViewportSize(new Dimension(200, 700));
-        this.setLayout(new BorderLayout());  // table display will occupy entire width if widened
-        this.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+        this.setLayout(new BorderLayout()); // table display will occupy entire width if widened
+        this.add(new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
     }
 
     protected abstract String formatRegister(Register value, int base);
@@ -103,6 +108,7 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
     protected abstract void endObserving();
 
     protected abstract void resetRegisters();
+
     /**
      * Sets up the data for the window.
      *
@@ -120,6 +126,7 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
         }
         return tableData;
     }
+
     /**
      * Reset and redisplay registers
      */
@@ -128,6 +135,7 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
         resetRegisters();
         updateRegisters();
     }
+
     /**
      * Clear highlight background color from any row currently highlighted.
      */
@@ -147,6 +155,7 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
             table.tableChanged(new TableModelEvent(table.getModel()));
         }
     }
+
     /**
      * Update register display using specified display base
      */
@@ -174,7 +183,8 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
     }
 
     /**
-     * Required by Observer interface.  Called when notified by an Observable that we are registered with.
+     * Required by Observer interface. Called when notified by an Observable that we
+     * are registered with.
      * Observables include:
      * The Simulator object, which lets us know when it starts and stops running
      * A register object, which lets us know of register operations
@@ -188,14 +198,15 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
         if (observable == rars.simulator.Simulator.getInstance()) {
             SimulatorNotice notice = (SimulatorNotice) obj;
             if (notice.getAction() == SimulatorNotice.SIMULATOR_START) {
-                // Simulated MIPS execution starts.  Respond to memory changes if running in timed
+                // Simulated MIPS execution starts. Respond to memory changes if running in
+                // timed
                 // or stepped mode.
                 if (notice.getRunSpeed() != RunSpeedPanel.UNLIMITED_SPEED || notice.getMaxSteps() == 1) {
                     beginObserving();
                     this.highlighting = true;
                 }
             } else {
-                // Simulated MIPS execution stops.  Stop responding.
+                // Simulated MIPS execution stops. Stop responding.
                 endObserving();
             }
         } else if (observable == settings) {
@@ -215,9 +226,9 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
 
     private void updateRowHeight() {
         Font possibleFonts[] = {
-            settings.getFontByPosition(Settings.REGISTER_HIGHLIGHT_FONT),
-            settings.getFontByPosition(Settings.EVEN_ROW_FONT),
-            settings.getFontByPosition(Settings.ODD_ROW_FONT),
+                settings.getFontByPosition(Settings.EDITOR_FONT),
+                settings.getFontByPosition(Settings.EDITOR_FONT),
+                settings.getFontByPosition(Settings.EDITOR_FONT),
         };
         int maxHeight = 0;
         for (int i = 0; i < possibleFonts.length; i++) {
@@ -229,12 +240,13 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
         table.setRowHeight(maxHeight);
     }
 
-
     /*
-    * Cell renderer for displaying register entries.  This does highlighting, so if you
-    * don't want highlighting for a given column, don't use this.  Currently we highlight
-    * all columns.
-    */
+     * Cell renderer for displaying register entries. This does highlighting, so if
+     * you
+     * don't want highlighting for a given column, don't use this. Currently we
+     * highlight
+     * all columns.
+     */
     private class RegisterCellRenderer extends DefaultTableCellRenderer {
         private Font font;
         private int alignment;
@@ -246,30 +258,31 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
         }
 
         public Component getTableCellRendererComponent(JTable table, Object value,
-                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+                boolean isSelected, boolean hasFocus, int row, int column) {
             JLabel cell = (JLabel) super.getTableCellRendererComponent(table, value,
                     isSelected, hasFocus, row, column);
             cell.setFont(font);
             cell.setHorizontalAlignment(alignment);
-            if (settings.getBooleanSetting(Settings.Bool.REGISTERS_HIGHLIGHTING) && highlighting && row == highlightRow) {
+            if (settings.getBooleanSetting(Settings.Bool.REGISTERS_HIGHLIGHTING) && highlighting
+                    && row == highlightRow) {
                 cell.setBackground(settings.getColorSettingByPosition(Settings.REGISTER_HIGHLIGHT_BACKGROUND));
                 cell.setForeground(settings.getColorSettingByPosition(Settings.REGISTER_HIGHLIGHT_FOREGROUND));
-                cell.setFont(settings.getFontByPosition(Settings.REGISTER_HIGHLIGHT_FONT));
+                cell.setFont(settings.getFontByPosition(Settings.EDITOR_FONT));
             } else if (row % 2 == 0) {
                 cell.setBackground(settings.getColorSettingByPosition(Settings.EVEN_ROW_BACKGROUND));
                 cell.setForeground(settings.getColorSettingByPosition(Settings.EVEN_ROW_FOREGROUND));
-                cell.setFont(settings.getFontByPosition(Settings.EVEN_ROW_FONT));
+                cell.setFont(settings.getFontByPosition(Settings.EDITOR_FONT));
             } else {
                 cell.setBackground(settings.getColorSettingByPosition(Settings.ODD_ROW_BACKGROUND));
                 cell.setForeground(settings.getColorSettingByPosition(Settings.ODD_ROW_FOREGROUND));
-                cell.setFont(settings.getFontByPosition(Settings.ODD_ROW_FONT));
+                cell.setFont(settings.getFontByPosition(Settings.EDITOR_FONT));
             }
             return cell;
         }
     }
 
     private class RegTableModel extends AbstractTableModel {
-        final String[] columnNames = {"Name", "Number", "Value"};
+        final String[] columnNames = { "Name", "Number", "Value" };
         private Object[][] data;
 
         private RegTableModel(Object[][] d) {
@@ -295,7 +308,7 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
         /*
          * JTable uses this method to determine the default renderer/
          * editor for each cell.
-      	*/
+         */
         public Class getColumnClass(int c) {
             return getValueAt(0, c).getClass();
         }
@@ -305,16 +318,15 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
          * editable.
          */
         public boolean isCellEditable(int row, int col) {
-            //Note that the data/cell address is constant,
-            //no matter where the cell appears onscreen.
+            // Note that the data/cell address is constant,
+            // no matter where the cell appears onscreen.
             return col == VALUE_COLUMN;
         }
 
-
         /*
-         * Update cell contents in table model.  This method should be called
-      	 * only when user edits cell, so input validation has to be done.  If
-       	 * value is valid, the register is updated.
+         * Update cell contents in table model. This method should be called
+         * only when user edits cell, so input validation has to be done. If
+         * value is valid, the register is updated.
          */
         public void setValueAt(Object value, int row, int col) {
             int val = 0;
@@ -325,8 +337,8 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
                 fireTableCellUpdated(row, col);
                 return;
             }
-            //  Assures that if changed during program execution, the update will
-            //  occur only between instructions.
+            // Assures that if changed during program execution, the update will
+            // occur only between instructions.
             Globals.memoryAndRegistersLock.lock();
             try {
                 registers[row].setValue(val);
@@ -338,7 +350,6 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
             fireTableCellUpdated(row, col);
         }
 
-
         /**
          * Update cell contents in table model.
          */
@@ -347,7 +358,6 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
             fireTableCellUpdated(row, col);
         }
     }
-
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -367,33 +377,33 @@ public abstract class RegisterBlockWindow extends JPanel implements Observer {
 
         private String[] regToolTips;
 
-        //Implement table cell tool tips.
+        // Implement table cell tool tips.
         public String getToolTipText(MouseEvent e) {
             java.awt.Point p = e.getPoint();
             int rowIndex = rowAtPoint(p);
             int colIndex = columnAtPoint(p);
             int realColumnIndex = convertColumnIndexToModel(colIndex);
-            if (realColumnIndex == NAME_COLUMN) { //Register name column
+            if (realColumnIndex == NAME_COLUMN) { // Register name column
                 return regToolTips[rowIndex];
             } else {
-                //You can omit this part if you know you don't have any
-                //renderers that supply their own tool tips.
+                // You can omit this part if you know you don't have any
+                // renderers that supply their own tool tips.
                 return super.getToolTipText(e);
             }
         }
 
         private String[] columnToolTips;
 
-        //Implement table header tool tips.
+        // Implement table header tool tips.
         protected JTableHeader createDefaultTableHeader() {
             return new JTableHeader(columnModel) {
-                        public String getToolTipText(MouseEvent e) {
-                            java.awt.Point p = e.getPoint();
-                            int index = columnModel.getColumnIndexAtX(p.x);
-                            int realIndex = columnModel.getColumn(index).getModelIndex();
-                            return columnToolTips[realIndex];
-                        }
-                    };
+                public String getToolTipText(MouseEvent e) {
+                    java.awt.Point p = e.getPoint();
+                    int index = columnModel.getColumnIndexAtX(p.x);
+                    int realIndex = columnModel.getColumn(index).getModelIndex();
+                    return columnToolTips[realIndex];
+                }
+            };
         }
     }
 }
