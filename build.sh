@@ -4,7 +4,7 @@ set -euo pipefail
 
 java_version=21
 
-flatlaf_version='3.2'
+flatlaf_version='3.7.2'
 flatlaf_file="flatlaf-$flatlaf_version.jar"
 
 source_dir="src"
