@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-java_version=11
+java_version=21
 
 flatlaf_version='3.2'
 flatlaf_file="flatlaf-$flatlaf_version.jar"
@@ -31,7 +31,9 @@ echo "Version = $build_version" >"$PWD/src/Version.properties"
 unset build_version
 
 echo "Compiling with Java $java_version"
-find "$source_dir" -name '*.java' | xargs javac --release "$java_version" -d "$build_dir/$source_dir"
+# None of the files included here will have abnormal characters.
+# shellcheck disable=SC2038
+find "$source_dir" -name '*.java' | xargs javac --release "$java_version" -d "$build_dir/$source_dir" "$@"
 
 echo 'Copying files'
 cp ./README.md ./LICENSE "$build_dir/$source_dir"
